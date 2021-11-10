@@ -78,3 +78,15 @@ func TestKelilingSegiTiga(t *testing.T) {
 		t.Fatal("Result Must Be = 60")
 	}
 }
+
+// Testing Sub Test
+func TestPenghitungan(t *testing.T) {
+	t.Run("tambah", func(t *testing.T) {
+		result := Penjumlahan(5, 5)
+		require.Equal(t, 10, result, "Result must be '10'")
+	})
+	t.Run("kurang", func(t *testing.T) {
+		result := Pengurangan(5, 2)
+		require.Equal(t, 2, result, "Result must be '3'")
+	})
+}
