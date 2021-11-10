@@ -2,8 +2,36 @@ package helper
 
 import (
 	"fmt"
+	"runtime"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
+
+// TestMain
+func TestMain(m *testing.M) {
+	// before
+	fmt.Println("BEFORE UNIT TEST")
+
+	m.Run()
+
+	// after
+	fmt.Println("AFTER UNIT TEST")
+}
+
+// unit test menggunakan assertions library testify
+func TestHelloWorldAssert(t *testing.T) {
+	result := HelloWorld("Udin")
+	assert.Equal(t, "Hello Udin", result, "Result must be 'Hello Udin'")
+	fmt.Println("TestHelloWorld with assert Done")
+}
+
+// unit test menggunakan require
+func TestHelloWorldRequire(t *testing.T) {
+	result := HelloWorld("Udin")
+	require.Equal(t, "Hello Udin", result, "Result must be 'Hello Udin'")
+}
 
 func TestHelloWorldFika(t *testing.T) {
 	result := HelloWorld("fika")
@@ -15,6 +43,20 @@ func TestHelloWorldFika(t *testing.T) {
 	}
 	fmt.Println("TestHelloWorldFika done")
 
+}
+
+func TestSkip(t *testing.T) {
+	if runtime.GOOS == "linux" {
+		t.Skip("Can not run on linux")
+	}
+
+	result := HelloWorld("Danil")
+	require.Equal(t, "Hello Danil", result, "Result must be 'Hello Danil'")
+}
+
+func TestCheckOsVersion(t *testing.T) {
+	result := CheckOsVersion()
+	require.Equal(t, "linux", result, "Result must be 'windows'")
 }
 
 func TestHelloWorldDanil(t *testing.T) {
