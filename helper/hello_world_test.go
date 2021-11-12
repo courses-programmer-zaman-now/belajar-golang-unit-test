@@ -87,6 +87,47 @@ func TestPenghitungan(t *testing.T) {
 	})
 	t.Run("kurang", func(t *testing.T) {
 		result := Pengurangan(5, 2)
-		require.Equal(t, 2, result, "Result must be '3'")
+		require.Equal(t, 3, result, "Result must be '3'")
 	})
+}
+
+// Membuat Table Test
+func TestTableHelloWorld(t *testing.T) {
+	tests := []struct {
+		name     string
+		request  string
+		expected string
+	}{
+		{
+			name:     "test1",
+			request:  "danil",
+			expected: "Hello danil",
+		},
+		{
+			name:     "test2",
+			request:  "haykal",
+			expected: "Hello haykal",
+		},
+	}
+
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			result := HelloWorld(test.request)
+			require.Equal(t, test.expected, result)
+		})
+	}
+
+}
+
+// belajar membuat benchmark untuk mengetest kecepatan proses function
+func BenchmarkHelloWorld(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		HelloWorld("danil")
+	}
+}
+
+func BenchmarkPenghitunganJumlah(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		Penjumlahan(2, 5)
+	}
 }
