@@ -131,3 +131,87 @@ func BenchmarkPenghitunganJumlah(b *testing.B) {
 		Penjumlahan(2, 5)
 	}
 }
+
+// sub benchmark
+func BenchmarkSubPerhitungan(b *testing.B) {
+	b.Run("tambah", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			Penjumlahan(2, 6)
+		}
+	})
+
+	b.Run("kurang", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			Pengurangan(3, 1)
+		}
+	})
+}
+
+// membuat Benchmark Tabel
+func BenchmarkTable(b *testing.B) {
+	benchmarks := []struct {
+		name    string
+		request string
+	}{
+		{
+			name:    "danil",
+			request: "danil syah arihardjo",
+		},
+		{
+			name:    "haykal",
+			request: "haykal dafiansyah",
+		},
+		{
+			name:    "fika",
+			request: "nufika",
+		},
+	}
+
+	for _, benchmark := range benchmarks {
+		b.Run(benchmark.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				HelloWorld(benchmark.request)
+			}
+		})
+	}
+}
+
+func BenchmarkTablePerhitungan(b *testing.B) {
+	values := []struct {
+		name string
+		bil1 int
+		bil2 int
+	}{
+		{
+			name: "hitungan1",
+			bil1: 5,
+			bil2: 3,
+		},
+		{
+			name: "hitungan2",
+			bil1: 4,
+			bil2: 1,
+		},
+		{
+			name: "hitungan3",
+			bil1: 6,
+			bil2: 7,
+		},
+	}
+
+	for _, benchmark := range values {
+		b.Run(benchmark.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				Penjumlahan(benchmark.bil1, benchmark.bil2)
+			}
+		})
+	}
+	for _, benchmark := range values {
+		b.Run(benchmark.name, func(b *testing.B) {
+			for i := 0; i < b.N; i++ {
+				Pengurangan(benchmark.bil1, benchmark.bil2)
+			}
+		})
+	}
+
+}
